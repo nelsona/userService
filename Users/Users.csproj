@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Validation.cs" />
+    <Compile Include="Interfaces\IValidation.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
