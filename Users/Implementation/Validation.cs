@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Text.RegularExpressions;
 using Users.Interfaces;
 
 namespace Users.Implementation
@@ -11,9 +14,28 @@ namespace Users.Implementation
             return isEmail;
         }
 
-        public bool IsPassWordValid(string password)
+        public PasswordValidationResponse IsPassWordValid(string password)
         {
-            throw new System.NotImplementedException();
+            var response = new PasswordValidationResponse {IsValid = true, Reasons = new List<string>()};
+            if (password.Length == 0)
+            {
+                response.IsValid = false;
+                response.Reasons.Add("Password is empty.");
+                return response;
+            }
+
+            if (password.Length >= Convert.ToInt32(ConfigurationManager.AppSettings["MinimumPasswordLength"])) return response;
+            
+            response.IsValid = false;
+            response.Reasons.Add("Password is too short.");
+
+            return response;
+        }
+
+        public class PasswordValidationResponse
+        {
+            public bool IsValid { get; set; }
+            public IList<string> Reasons { get; set; }
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Users.Implementation;
 
 namespace Users.Interfaces
 {
     public interface IValidation
     {
         bool IsEmailValid(string emailAddress);
-        bool IsPassWordValid(string password);
+        Validation.PasswordValidationResponse IsPassWordValid(string password);
     }
 }
